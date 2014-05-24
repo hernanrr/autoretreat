@@ -34,6 +34,7 @@ def nodes_in_domain(x_shore, dx):
 
     Returns: 
         N : Number of nodes required to fully describe the fluvial reach. [ 1 ]
+        dx_shore : Computational spatial step of the shoreline [ L ]
 
     Comments: 
         The computational domain needs to have one more node than the number of 
