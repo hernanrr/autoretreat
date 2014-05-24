@@ -12,4 +12,4 @@ level rises. It assumes a fixed sediment feed location.
    at least one plot. Maybe. 
 
 ** Contact
-   Ricardo Hernández M. [[hernanrr@email.sc.edu]]
+   Ricardo Hernández. <hernanrr@email.sc.edu>
