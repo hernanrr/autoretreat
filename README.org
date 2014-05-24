@@ -1,16 +1,15 @@
-#+TITLE: Delta Autoretreat Simulation
-#+AUTHOR: Ricardo Hernández M.
+* Delta Autoretreat Simulation
 
 This Python code simulates the autoretreat of a delta when the downstream base
 level rises. It assumes a fixed sediment feed location. 
 
-* Usage
-  Run the =autoretreat.py= file. The input parameters are hard-coded in there
-  for the time being. I'll get around to fixing it later. 
+** Usage
+   Run the =autoretreat.py= file. The input parameters are hard-coded in there
+   for the time being. I'll get around to fixing it later. 
 
-* Output
-  Expect a bunch of text files with columns of data, a couple of log files and
-  at least one plot. Maybe. 
+** Output
+   Expect a bunch of text files with columns of data, a couple of log files and
+   at least one plot. Maybe. 
 
-* Contact
-  Ricardo Hernández M mailto:hernanrr@email.sc.edu
+** Contact
+   Ricardo Hernández M. [[hernanrr@email.sc.edu]]
