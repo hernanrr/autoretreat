@@ -782,7 +782,9 @@ def update_bedslope(dx, eta):
 
 def update_delta_slope(x_shore, x_toe, eta_shore, eta_toe):
     """Computes the slope of the delta front."""
-    return (eta_shore - eta_toe) / (x_toe - x_shore)
+    S_d = 0.2
+#    S_d =  (eta_shore - eta_toe) / (x_toe - x_shore)
+    return S_d
     
 def update_domain(dt, dx, x_toe, N, N_old, eta, eta_b, S_b, B0, sigma=0):
     """"""
