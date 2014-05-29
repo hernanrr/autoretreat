@@ -397,7 +397,7 @@ def engelund_hansen(Cf, tau_star, tau_c_star = 0.0):
         qb_star : Dimensionless Einstein Number. [ 1 ]
 
     """
-    qb_star = 0.05 / Cf * tau_star^(5.2)
+    qb_star = 0.05 / Cf * tau_star**(5./2.)
     return qb_star, tau_c_star
 def ashida_michiue(tau_star, tau_c_star=0.05):
     """Returns the Dimensionless Einstein Number based on the Ashida & Michiue
@@ -691,7 +691,7 @@ def compute_water_surface(t, Q_w, qw, B0, S, Cf, Cz, dx, H, Hc, eta, N, N_old, x
     # Create the water depth array; set the downstream bounday condition.
     H[-1] = xi_d - eta[-1]
     # Compute the water surface profile using the backwater formulation.
-    pdb.set_trace()
+#    pdb.set_trace()
     H = backwater(xi_d, dx, eta, H, S, Q_w, B0, Cz)
     return H, Hn
 
@@ -864,7 +864,7 @@ def main():
     U = np.zeros_like(H)
     # Begin time loop
     for i in xrange(m_to_end):
-        pdb.set_trace()
+#        pdb.set_trace()
         # What is the time?
         t = i * dt
         # We are currently at the beginning of the timestep. 
@@ -919,7 +919,7 @@ def main():
     plt.show()
     plt.close()
     # Finalize the simulation
-    pdb.set_trace()
+#    pdb.set_trace()
     return
 
         
