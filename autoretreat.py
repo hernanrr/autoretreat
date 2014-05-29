@@ -397,7 +397,7 @@ def engelund_hansen(Cf, tau_star, tau_c_star = 0.0):
         qb_star : Dimensionless Einstein Number. [ 1 ]
 
     """
-    qb_star = 0.05 / Cf * tau_star^(5.2.)
+    qb_star = 0.05 / Cf * tau_star^(5.2)
     return qb_star, tau_c_star
 def ashida_michiue(tau_star, tau_c_star=0.05):
     """Returns the Dimensionless Einstein Number based on the Ashida & Michiue
