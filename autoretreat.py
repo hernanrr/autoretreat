@@ -824,7 +824,7 @@ def main():
     wd = os.path.join(savepath, dirname)
 
     # Input paramenters. Eventually this will read from a file.
-    x_shore = 10000.    # [ m ]
+    x_shore = 10000.0    # [ m ]
     eta_shore = 3.    # [ m ]
     eta_toe = np.float_(0.)    # [ m 
     S = np.float_(2.5e-4)    # [ 1 ] Initial Slope of the fluvial reach
@@ -832,14 +832,14 @@ def main():
     S_b = np.float_(0.0) # 1e-4    # [ 1 ] Slope of the basement
     dx = np.float_(500)    # [ m ]
     dt = 86400 * 0.182625    # [ t ] Time step
-    sim_time = 1 * 365.25 * 86400 # [ T ] Simulation time, in years to seconds.
+    sim_time = 15 * 365.25 * 86400 # [ T ] Simulation time, in years to seconds.
     Cz = 15.0     # Chezy dimensionless resistance coefficient
     I_f = 1.    # Flood intermitency factor
     B0 = np.float_(1.)    # [ m ] Channel width
     Q_w = 6.    # [ m ** 3 / s ] Water flowrate into system
     xi_d = 8.5    # [ m ] Downstream water surface elevation.
     qt_f = 83627.64   # [ tons / y ] Sediment feed rate. (0.001 m2/s)
-    D = 2.0    # Grain size of sediment [ mm ]
+    D = 0.5 #2.0    # Grain size of sediment [ mm ]
     R = 1.65 # Submerged specific gravity of sediment [ 1 ]
     lambda_p = 0.4
     sigma = 0.0    # Redefine this as a function. [ L / T ]
