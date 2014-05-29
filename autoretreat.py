@@ -386,7 +386,19 @@ def vol_to_mass_feedrate_converter(qt, R, rho):
 """
     return (qt * rho * ( R + 1 )) / 1000  * ( 365.25 * 24 * 60 * 60 ) 
 
-    
+def engelund_hansen(Cf, tau_star, tau_c_star = 0.0):
+    """Returns the Dimensionless Einstein Number based on the Engelund and
+    Hansen formulation.
+
+    Args: 
+        tau_star: Dimensionless boundary shear stress at the bed. [ 1 ] 
+        tau_c_star: Critical Dimensionless boundary shear stress at the bed. [1]
+    Returns:
+        qb_star : Dimensionless Einstein Number. [ 1 ]
+
+    """
+    qb_star = 0.05 / Cf * tau_star^(5.2.)
+    return qb_star, tau_c_star
 def ashida_michiue(tau_star, tau_c_star=0.05):
     """Returns the Dimensionless Einstein Number based on the Ashida & Michiue
        formulation. 
@@ -694,7 +706,7 @@ def flow(t, Q_w, qw, B0, S, Cf, Cz, dx, H, Hc, eta, N, N_old, xi_d, D, R):
     tau_star = shields_number(U, Cf, D, R)
     return H, Hn, U, tau_star
 
-def load(t, dx, N, N_old, qt, tau_star, R, D):
+def load(t, dx, N, N_old, qt, Cf, tau_star, R, D):
     """Auxiliary function to compute load parameters."""
     # Resize the qt array to include the added nodes, if necessary
     grows = N > N_old
@@ -702,7 +714,8 @@ def load(t, dx, N, N_old, qt, tau_star, R, D):
     if grows or shrinks:
         qt = np.resize(qt, N)    
     # and an array for the dimensionless sediment transport rate:
-    qb_star, tau_c_star = wong_parker(tau_star)
+#    qb_star, tau_c_star = wong_parker(tau_star)
+    qb_star, tau_c_star = engelund_hansen(Cf, tau_star)
     # OK! Now we can compute the bedload transport capacity!
     qt = bedload_transport_capacity(tau_star, tau_c_star, qt, R, D, qb_star)
     return qt
@@ -863,7 +876,7 @@ def main():
                                   N_old, xi_d, D, R)
         # Compute load parameters
         qt_old = qt.copy()
-        qt = load(t, dx, N, N_old, qt, tau_star, R, D)
+        qt = load(t, dx, N, N_old, qt, Cf, tau_star, R, D)
         if i in i_out:
             if i == 0:
                 os.mkdir(wd)
