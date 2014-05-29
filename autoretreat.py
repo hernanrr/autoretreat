@@ -489,8 +489,7 @@ def update_shoreline(dt, dx, eta, eta_old, qt,  lambda_p, I_f=1.0, sigma=0.0):
     eta_shore_old = eta_old[-1]
     eta[-1] = exner_equation(dt, dx[-2:].sum(), eta[-1], np.array([qt[-3],
                                                                    qt[-1]]),
-                             lambda_p,
-                             I_f, sigma)
+                             lambda_p,I_f, sigma)
     eta_shore = eta[-1]
     d_eta_shore_dt = np.diff([eta_shore_old, eta[-1]]) / dt
     return eta, eta_shore, d_eta_shore_dt    
@@ -680,6 +679,7 @@ def compute_water_surface(t, Q_w, qw, B0, S, Cf, Cz, dx, H, Hc, eta, N, N_old, x
     # Create the water depth array; set the downstream bounday condition.
     H[-1] = xi_d - eta[-1]
     # Compute the water surface profile using the backwater formulation.
+    pdb.set_trace()
     H = backwater(xi_d, dx, eta, H, S, Q_w, B0, Cz)
     return H, Hn
 
@@ -819,7 +819,7 @@ def main():
     S_b = np.float_(0.0) # 1e-4    # [ 1 ] Slope of the basement
     dx = np.float_(500)    # [ m ]
     dt = 86400 * 0.182625    # [ t ] Time step
-    sim_time = 15 * 365.25 * 86400 # [ T ] Simulation time, in years to seconds.
+    sim_time = 1 * 365.25 * 86400 # [ T ] Simulation time, in years to seconds.
     Cz = 15.0     # Chezy dimensionless resistance coefficient
     I_f = 1.    # Flood intermitency factor
     B0 = np.float_(1.)    # [ m ] Channel width
@@ -851,6 +851,7 @@ def main():
     U = np.zeros_like(H)
     # Begin time loop
     for i in xrange(m_to_end):
+        pdb.set_trace()
         # What is the time?
         t = i * dt
         # We are currently at the beginning of the timestep. 
@@ -876,7 +877,7 @@ def main():
             qt_out = np.append(qt, 0)    # By definition, nothing leaves the toe
             output_data = np.transpose(np.vstack((x_out, eta_b_out, eta_out,
                                                   xi_out, S_out, qt_out )))
-            print 'Output data stored.'
+            print 'Output data stored at time {}.'.format(t)
             print output_data
             hdr = ('x-coord / m\t eta_b / m\t eta / m\t xi/ m\t S / m/m\t qt / m^3/s ')
             fmt = '%1.8f'
